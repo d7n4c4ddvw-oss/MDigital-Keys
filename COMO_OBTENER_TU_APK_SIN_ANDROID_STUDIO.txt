@@ -1,0 +1,17 @@
+MÚSICO DIGITAL KEYS - APK SIN ANDROID STUDIO
+
+1. En github.com, inicia sesión y crea un repositorio PRIVADO nuevo, vacío.
+2. Sube el contenido de esta carpeta al repositorio (no el ZIP como un solo archivo). Asegúrate de que .github/workflows/compilar-apk.yml esté incluido.
+3. En GitHub abre Actions > Compilar APK Músico Digital Keys > Run workflow.
+   También se ejecuta automáticamente al subir a la rama main.
+4. Espera a que el trabajo termine correctamente.
+5. Abre la ejecución > Artifacts > Musico-Digital-Keys-APK.
+6. Descarga el ZIP de artifacts, descomprímelo e instala app-debug.apk en Android.
+
+NOTAS:
+- Es una compilación DEBUG para pruebas; no es una versión de Google Play.
+- La compilación se realiza en GitHub; no requiere Android Studio en tu PC.
+- Requiere conexión y cuenta de GitHub. El uso gratuito está sujeto a límites de GitHub.
+- IndexedDB guarda datos en el almacenamiento de la app; borrar los datos o desinstalar elimina los instrumentos guardados.
+- Prueba en un Android real: la importación de grandes archivos, MIDI y las descargas de R2 pueden requerir ajustes.
+- Antes de distribuir bancos de terceros, comprueba sus licencias.
