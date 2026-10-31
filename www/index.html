@@ -107,6 +107,73 @@ body{overflow-x:hidden}
 .md-import-symbol{display:grid;place-items:center;margin:0 auto 12px;width:58px;height:58px;border-radius:16px;background:#16466b;color:#71e7dd;font-size:28px}.md-import-dialog h2{font-size:20px;margin:8px 0}.md-import-dialog p{color:#9fc1dd;font-size:13px;overflow-wrap:anywhere}.md-progress-track{height:12px;background:#061222;border:1px solid #355a78;border-radius:99px;overflow:hidden;margin:18px 0 9px}.md-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#258bdc,#44e2d4);border-radius:99px;transition:width .13s}.md-progress-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#b2d9ee}
 </style><style>
 .md-store-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:23px;background:linear-gradient(110deg,#123c63,#101d32 75%);border:1px solid #32688c;border-radius:14px;margin-bottom:15px}.md-store-hero h2{font-size:24px;margin:10px 0 5px}.md-store-hero p{color:#b5cbe2;margin:0;line-height:1.5}.md-store-tools{display:flex;gap:9px;margin-bottom:12px}.md-store-tools input,.md-store-tools select{background:#0a1b2f;border:1px solid #355b7c;border-radius:9px;color:#eef6ff;padding:12px;min-width:0}.md-store-tools input{flex:1}.md-store-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:12px}.md-store-card{border:1px solid #315575;border-radius:13px;padding:17px;background:linear-gradient(155deg,#17314e,#0a182a)}.md-store-art{width:52px;height:52px;border-radius:13px;background:#17476b;display:grid;place-items:center;font-size:28px;margin-bottom:12px}.md-store-card h3{font-size:15px;margin:0 0 7px;overflow-wrap:anywhere}.md-store-card p{font-size:12px;color:#9db8d5;margin:0 0 14px}.md-store-card button{width:100%;margin-top:12px}.md-store-progress{height:6px;background:#071422;border-radius:20px;overflow:hidden;margin-top:11px}.md-store-progress div{height:100%;width:0;background:linear-gradient(90deg,#248af0,#42ddc8);transition:width .15s}.md-store-note{font-size:11px;color:#b2d1ed;margin-top:8px;min-height:15px}.md-store-card button:disabled{opacity:.65;cursor:wait}@media(max-width:650px){.md-store-hero{flex-direction:column;align-items:stretch;padding:16px}.md-store-tools{flex-direction:column}.md-store-hero h2{font-size:20px}}
+</style><style id="mdkeys-android-responsive-v2">
+/* MD Keys Android Responsive v2: visual-only overrides, audio logic unchanged */
+html{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{width:100%;min-width:0;overflow-x:hidden}
+button,select,input{max-width:100%}
+button{touch-action:manipulation}
+.workspace,.panel,.md-section,.md-nav-wrap,.heading,.below,.md-grid{min-width:0;max-width:100%}
+.topbar{padding:12px clamp(12px,2vw,26px);gap:12px}
+.brand{min-width:0;white-space:normal;line-height:1.15}
+.brand>div:last-child{min-width:0}
+.nav-main{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#467aa6 #0b1a2d}
+.nav-main button{flex:0 0 auto;min-width:max-content;white-space:nowrap;scroll-snap-align:start}
+.mixer-shell{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.md-store-card{min-width:0;display:flex;flex-direction:column;box-shadow:0 10px 24px #0002;transition:border-color .2s,transform .2s}
+.md-store-card:hover{border-color:#4c90c4}
+.md-store-card button{margin-top:auto;min-height:44px}
+.md-store-note{overflow-wrap:anywhere;line-height:1.4;margin-bottom:12px}
+.md-store-card p{overflow-wrap:anywhere}
+.md-store-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:12px}
+.md-store-tools input,.md-store-tools select{min-height:46px}
+.md-store-hero{min-width:0}
+.md-store-hero>div{min-width:0}
+.md-store-hero button{flex-shrink:0;min-height:44px}
+#mdLibraryItems .lib-item{min-width:0}
+@media(max-width:1050px){
+ .topbar{flex-wrap:wrap;align-items:center;justify-content:center}
+ .brand{margin-right:auto}
+ .toolbar{width:100%;justify-content:stretch;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .toolbar button{min-width:0;white-space:nowrap;font-size:12px;padding:11px 6px;min-height:43px}
+ .toolbar button .ico{width:16px;height:16px}
+ .heading{flex-direction:column;align-items:stretch}
+ .heading>.row{width:100%;display:flex;flex-wrap:wrap}
+ .heading>.row button{flex:1 1 130px;min-height:42px}
+ .channels,.focus-mixer .channels{grid-template-columns:repeat(7, minmax(170px,170px));min-width:max-content;gap:10px}
+ .md-grid,.below{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:650px){
+ .workspace{padding:12px 10px 28px}
+ .topbar{padding:11px 12px;position:relative}
+ .brand{font-size:16px;gap:9px}
+ .brand small{display:block;font-size:9px}
+ .logo{width:40px;height:40px;flex-shrink:0}
+ .toolbar{gap:6px}
+ .toolbar button{font-size:11px;padding:10px 3px;line-height:1.2}
+ .nav-main{margin:0 0 12px;padding:6px;gap:6px}
+ .nav-main button{font-size:11px;min-width:max-content;padding:11px 13px;min-height:43px}
+ .heading h1{font-size:21px}
+ .heading .sub{line-height:1.5}
+ .panel{padding:13px 11px;border-radius:15px}
+ .panel-head{align-items:flex-start}
+ .channels,.focus-mixer .channels{grid-template-columns:repeat(7, minmax(160px,160px));gap:9px}
+ .strip,.masterstrip{padding:12px 10px}
+ .md-store-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+ .md-store-hero{padding:18px 15px;gap:14px}
+ .md-store-hero h2{font-size:22px;line-height:1.2}
+ .md-store-hero p{font-size:13px}
+ .md-store-hero button{width:100%}
+ .md-store-tools{flex-direction:column;gap:8px}
+ .md-store-tools input,.md-store-tools select{width:100%}
+ .md-store-card{padding:16px;gap:3px}
+ .md-store-art{width:48px;height:48px}
+ .md-store-card button{margin-top:9px}
+ #mdLibraryItems .lib-item{flex-wrap:wrap}
+ .inspector-grid{grid-template-columns:1fr}
+}
+@media(max-width:380px){.brand{font-size:14px}.toolbar button{font-size:10px}.heading>.row button{flex-basis:120px}}
+@media(prefers-reduced-motion:reduce){.md-store-card{transition:none}html{scroll-behavior:auto}}
 </style></head><body>
 <header class="topbar"><div class="brand"><div class="logo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 3v10m5-10v10m5-10v10M3 13h18M9 3v6m6-6v6"/></svg></div><div>MÚSICO DIGITAL <span>KEYS</span><small>PERFORMANCE WORKSTATION</small></div></div><nav class="toolbar"><button data-view="studio" class="tab-active"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M7 3v10m5-10v10m5-10v10M3 13h18M9 3v6m6-6v6"/></svg> Estudio</button><button data-view="mixer"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16m8-16v16m8-16v16"/><rect x="2" y="7" width="4" height="5" rx="1"/><rect x="10" y="13" width="4" height="5" rx="1"/><rect x="18" y="5" width="4" height="5" rx="1"/></svg> Mixer Live</button><button id="full"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3"/></svg> Pantalla completa</button></nav></header>
 <main class="workspace"><div class="md-nav-wrap"><nav class="nav-main" aria-label="Secciones Músico Digital Keys"><button class="active" data-mdtab="live">🎚️ MIXER LIVE</button><button data-mdtab="layers">🎹 CAPAS</button><button data-mdtab="library">📁 MIS PIANOS</button><button data-mdtab="store">🛍️ TIENDA DIGITAL</button><button data-mdtab="presets">💾 PRESETS</button><button data-mdtab="settings">⚙️ CONFIGURACIÓN</button></nav></div><div class="heading"><div><h1>LIVE MIXER <span class="h1-accent">STUDIO</span></h1><p class="sub">Instrumentos sampleados · 6 canales · Mezcla en tiempo real</p></div><div class="row"><span class="badge">● LIVE ENGINE</span><button id="audio" class="primary"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg> Activar audio</button><button id="stop"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/></svg> Detener notas</button><button id="midi"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 5v7m4-7v7m4-7v7m4-7v7M2 12h20"/></svg> Conectar MIDI</button></div></div>
