@@ -1,50 +1,117 @@
+
 name: Compilar APK Músico Digital Keys
+
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
+
 jobs:
   android:
+    name: Compilar Android
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
+
     steps:
       - name: Obtener proyecto
         uses: actions/checkout@v4
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+
       - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-      - name: Configurar Android SDK
-        uses: android-actions/setup-android@v3
+
+      # Usar el Android SDK preinstalado en GitHub
+      - name: Verificar Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          test -d "$ANDROID_HOME"
+          test -f "$ANDROID_HOME/platform-tools/adb"
+          echo "Android SDK disponible"
+
       - name: Instalar dependencias
         run: npm install --no-audit --no-fund
+
+      - name: Preparar carpeta web
+        run: |
+          test -f capacitor.config.json
+          test -f www/index.html
+          echo "Archivos web encontrados"
+
       - name: Generar proyecto Android
-        run: npx cap add android
+        run: |
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+
       - name: Sincronizar HTML
         run: npx cap sync android
-      - name: Forzar orientación horizontal en Android
+
+      - name: Forzar orientación horizontal
         run: |
           python3 - <<'PYANDROID'
           from pathlib import Path
-          p=Path('android/app/src/main/AndroidManifest.xml')
-          s=p.read_text()
-          if 'android:screenOrientation=' not in s:
-              s=s.replace('<activity', '<activity android:screenOrientation="sensorLandscape"', 1)
-          p.write_text(s)
+          import re
+
+          p = Path("android/app/src/main/AndroidManifest.xml")
+          s = p.read_text(encoding="utf-8")
+
+          pattern = r'(<activity\b[^>]*)(>)'
+
+          def set_orientation(match):
+              tag = match.group(1)
+              if 'android:screenOrientation=' in tag:
+                  tag = re.sub(
+                      r'android:screenOrientation="[^"]*"',
+                      'android:screenOrientation="sensorLandscape"',
+                      tag
+                  )
+              else:
+                  tag += ' android:screenOrientation="sensorLandscape"'
+              return tag + match.group(2)
+
+          s, count = re.subn(
+              pattern,
+              set_orientation,
+              s,
+              count=1,
+              flags=re.DOTALL
+          )
+
+          if count != 1:
+              raise RuntimeError("No se encontro la actividad Android")
+
+          p.write_text(s, encoding="utf-8")
+          print("Orientacion horizontal configurada")
           PYANDROID
 
-      - name: Compilar APK de prueba
+      - name: Compilar APK
         working-directory: android
-        run: bash ./gradlew assembleDebug --no-daemon
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Verificar APK generado
+        run: |
+          APK="android/app/build/outputs/apk/debug/app-debug.apk"
+          test -f "$APK"
+          ls -lh "$APK"
+          echo "APK compilado correctamente"
+
       - name: Publicar APK descargable
         uses: actions/upload-artifact@v4
         with:
           name: Musico-Digital-Keys-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+          retention-days: 30
