@@ -1,46 +1,50 @@
-
 name: Compilar APK Músico Digital Keys
-
 on:
   workflow_dispatch:
   push:
     branches: [main]
-
 jobs:
-  build:
+  android:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
-      - name: Descargar proyecto
+      - name: Obtener proyecto
         uses: actions/checkout@v4
-
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Configurar Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
       - name: Instalar dependencias
-        run: npm install
-
-      - name: Crear proyecto Android
+        run: npm install --no-audit --no-fund
+      - name: Generar proyecto Android
+        run: npx cap add android
+      - name: Sincronizar HTML
+        run: npx cap sync android
+      - name: Forzar orientación horizontal en Android
         run: |
-          npx cap add android
-          npx cap sync android
+          python3 - <<'PYANDROID'
+          from pathlib import Path
+          p=Path('android/app/src/main/AndroidManifest.xml')
+          s=p.read_text()
+          if 'android:screenOrientation=' not in s:
+              s=s.replace('<activity', '<activity android:screenOrientation="sensorLandscape"', 1)
+          p.write_text(s)
+          PYANDROID
 
-      - name: Compilar APK
+      - name: Compilar APK de prueba
         working-directory: android
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
-
-      - name: Publicar APK
+        run: bash ./gradlew assembleDebug --no-daemon
+      - name: Publicar APK descargable
         uses: actions/upload-artifact@v4
         with:
           name: Musico-Digital-Keys-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
